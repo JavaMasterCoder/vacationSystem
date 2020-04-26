@@ -37,7 +37,7 @@ public class EditEmployeeDataController {
     }
 
     @PostMapping(path = "employee/edit")
-    public String processEditForm(@RequestParam(value = "id", required = false) Integer id,
+    public String processEditForm(@RequestParam(value = "id") Integer id,
                                   @RequestParam String FIO,
                                   @RequestParam Date birthDate,
                                   @RequestParam Integer personalNumber,
@@ -61,6 +61,6 @@ public class EditEmployeeDataController {
 
         employeeDAO.updateEditedEmployee(editedEmployee);
 
-        return "redirect:/";
+        return "redirect:/employee/all";
     }
 }

@@ -2,6 +2,7 @@ package gregor.melikhov.vacation.system.web.controllers;
 
 import gregor.melikhov.vacation.system.db.EmployeeDAO;
 import gregor.melikhov.vacation.system.model.Vacation;
+import gregor.melikhov.vacation.system.web.forms.EmployeesVacationsForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,11 +19,13 @@ public class ShowEmployeeVacationsController {
     @GetMapping(path = "vacations/employee")
     public String getEmployeesVacationForm(ModelMap model, @RequestParam String login) {
 
-        List<Vacation> vacationsByEmployee = employeeDAO.findVacationsByEmployee(employeeDAO.findEmployeeByLogin(login));
+        List<Vacation> vacations = employeeDAO.findVacationsByEmployee(employeeDAO.findEmployeeByLogin(login));
 
-        System.out.println("stop");
+        EmployeesVacationsForm employeesVacationsForm = new EmployeesVacationsForm();
+        employeesVacationsForm.setVacations(vacations);
+
+        model.addAttribute("employeesVacationsForm", employeesVacationsForm);
 
         return "employeesVacations";
-
     }
 }

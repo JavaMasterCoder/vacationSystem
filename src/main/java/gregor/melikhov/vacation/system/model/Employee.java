@@ -17,20 +17,18 @@ public class Employee {
     private String FIO;
 
     @Column(nullable = false)
-//    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int personalNumber;
 
     @Column(nullable = false)
     private String post;
 
     @Column(nullable = false)
-//    @Temporal(TemporalType.DATE)
     private Date dateOfStartWorking;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String login;
 
     @Column(nullable = false)
@@ -135,5 +133,10 @@ public class Employee {
 
     public boolean addVacationToList(Vacation vacation) {
         return vacations.add(vacation);
+    }
+
+    @Override
+    public String toString() {
+        return FIO;
     }
 }

@@ -1,9 +1,21 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="allVacationsForm" type="gregor.melikhov.vacation.system.web.forms.AllVacationsForm" scope="request"/>
 <html>
 <head>
     <title>All vacations</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        table {
+            border-spacing: 15px;
+        }
+    </style>
 </head>
 <body>
 <c:choose>
@@ -17,30 +29,45 @@
         <c:forEach var="vacation" items="${allVacationsForm.allVacations}">
             <tr>
                 <td>${vacation.employee.FIO}</td>
-                <td><input type="date" value="${vacation.vacationStartDate}"></td>
-                <td><input type="date" value="${vacation.vacationEndDate}"></td>
+                <td><fmt:formatDate value="${vacation.vacationStartDate}" pattern="dd.MM.yyyy"/></td>
+                <td><fmt:formatDate value="${vacation.vacationEndDate}" pattern="dd.MM.yyyy"/></td>
             </tr>
         </c:forEach>
         </table>
-        <form action="vacations/all?sortBy=employees" method="get">
+        <p></p>
+        <form action="/vacationSystem/vacations/all/sortByEmployees" method="post">
             <input type="submit" value="Сортировать по сотрудникам">
         </form>
-        <form action="vacations/all?sortBy=period" method="get">
+        <form action="/vacationSystem/vacations/all/sortByPeriod" method="post">
             <input type="submit" value="Сортировать по периоду">
         </form>
-        <form action="" method="get">
-            <input type="text" placeholder="ФИО сотрудника" value="">
+        <form action="/vacationSystem/vacations/all/sortByEmployee" method="post">
+            <input type="text" placeholder="ФИО сотрудника" name="FIO" value="">
             <input type="submit" value="Сортировать по сотруднику">
         </form>
-        <form action="" method="get">
+        <form action="/vacationSystem/vacations/all/sortBySpecifiedPeriod" method="post">
             <label>
                 Дата начала отпусков:
-                <input type="date" value="">
+                <c:choose>
+                    <c:when test="${not empty allVacationsForm.startOfPeriod}">
+                        <input type="date" name="startOfPeriod" value="${allVacationsForm.startOfPeriod}">
+                    </c:when>
+                    <c:otherwise>
+                        <input type="date" name="startOfPeriod" value="">
+                    </c:otherwise>
+                </c:choose>
             </label>
 
             <label>
                 Дата окончания отпусков:
-                <input type="date" value="">
+                <c:choose>
+                    <c:when test="${not empty allVacationsForm.endOfPeriod}">
+                        <input type="date" name="endOfPeriod" value="${allVacationsForm.endOfPeriod}">
+                    </c:when>
+                    <c:otherwise>
+                        <input type="date" name="endOfPeriod" value="">
+                    </c:otherwise>
+                </c:choose>
             </label>
             <input type="submit" value="Сортировать по отпускам в ограниченном диапазоне">
         </form>

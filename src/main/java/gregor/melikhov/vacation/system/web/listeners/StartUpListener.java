@@ -31,43 +31,39 @@ public class StartUpListener {
         String login = "gregor";
         String password = "root";
 
-        employeeDAO.createEmployee(FIO, birthDate, personalNumber, post, dateOfStartWorking, login, password);
-
         calendar.set(2020, Calendar.JUNE, 7);
         Date dateOfStartVacation = new Date(calendar.getTime().getTime());
 
         calendar.set(2020, Calendar.JUNE, 14);
         Date dateOfEndVacation = new Date(calendar.getTime().getTime());
 
+        employeeDAO.createEmployee(FIO, birthDate, personalNumber, post, dateOfStartWorking, login, password);
         Vacation vacation = new Vacation(employeeDAO.findEmployeeByLogin(login), dateOfStartVacation, dateOfEndVacation);
-        employeeDAO.addVacation(vacation);
-    }
 
-    private Employee createSecondEmployee() {
-        Calendar calendar = Calendar.getInstance();
+        employeeDAO.addVacation(vacation);
+
         calendar.set(1997, Calendar.OCTOBER, 9);
-        Date birthDate = new Date(calendar.getTime().getTime());
+        birthDate = new Date(calendar.getTime().getTime());
 
         calendar.set(2020, Calendar.MAY, 12);
-        Date dateOfStartWorking = new Date(calendar.getTime().getTime());
+        dateOfStartWorking = new Date(calendar.getTime().getTime());
 
-        String FIO = "Melikhov Ivan";
-        int personalNumber = 1;
-        String post = "C++-programmer";
-        String login = "ivan";
-        String password = "ivan";
+        FIO = "Melikhov Ivan";
+        personalNumber = 2;
+        post = "Research";
+        login = "ivan";
+        password = "root";
 
-        return new Employee(FIO, birthDate, personalNumber, post, dateOfStartWorking, login, password);
-    }
+        employeeDAO.createEmployee(FIO, birthDate, personalNumber, post, dateOfStartWorking, login, password);
 
-    private Vacation createVacationForSecondEmployee(Employee employee) {
-        Calendar calendar = Calendar.getInstance();
         calendar.set(2020, Calendar.JUNE, 8);
-        Date dateOfStartVacation = new Date(calendar.getTime().getTime());
+        dateOfStartVacation = new Date(calendar.getTime().getTime());
 
         calendar.set(2020, Calendar.JUNE, 10);
-        Date dateOfEndVacation = new Date(calendar.getTime().getTime());
+        dateOfEndVacation = new Date(calendar.getTime().getTime());
 
-        return new Vacation(employee, dateOfStartVacation, dateOfEndVacation);
+        vacation = new Vacation(employeeDAO.findEmployeeByLogin(login), dateOfStartVacation, dateOfEndVacation);
+
+        employeeDAO.addVacation(vacation);
     }
 }

@@ -4,6 +4,17 @@
 <html>
 <head>
     <title>All employees</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        table {
+            border-spacing: 15px;
+        }
+    </style>
 </head>
 <body>
 <table>

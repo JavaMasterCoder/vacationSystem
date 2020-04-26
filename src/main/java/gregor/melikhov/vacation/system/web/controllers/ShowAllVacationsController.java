@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -26,24 +28,53 @@ public class ShowAllVacationsController {
         AllVacationsForm allVacationsForm = new AllVacationsForm();
         allVacationsForm.setAllVacations(allVacations);
 
-        model.addAttribute(FORM_ATTRIBUTE, allVacationsForm);
+        model.addAttribute("allVacationsForm", allVacationsForm);
         return "allVacations";
     }
 
-    @GetMapping(path = "vacations/all?sortBy=")
-    public String sortByEmployees(ModelMap model, @RequestParam String sortBy) {
+    @PostMapping(path = "vacations/all/sortByEmployees")
+    public String sortByEmployees(ModelMap model) {
         List<Vacation> allVacations = employeeDAO.findAllVacations();
 
-        AllVacationsForm allVacationsForm;
-        if (SORT_BY_PERIOD.equals(sortBy)) {
-             allVacationsForm = new AllVacationsForm(allVacations, true);
-        } else {
-            allVacationsForm = new AllVacationsForm(allVacations, false);
-        }
+        AllVacationsForm allVacationsForm = new AllVacationsForm(allVacations, false);
 
-        model.addAttribute(FORM_ATTRIBUTE, allVacationsForm);
+        model.addAttribute("allVacationsForm", allVacationsForm);
 
         return "allVacations";
     }
 
+    @PostMapping(path = "vacations/all/sortByPeriod")
+    public String sortByPeriod(ModelMap model) {
+        List<Vacation> allVacations = employeeDAO.findAllVacations();
+
+        AllVacationsForm allVacationsForm = new AllVacationsForm(allVacations, true);
+
+        model.addAttribute("allVacationsForm", allVacationsForm);
+
+        return "allVacations";
+    }
+
+    @PostMapping(path = "vacations/all/sortByEmployee")
+    public String sortByEmployee(ModelMap model, @RequestParam String FIO) {
+        List<Vacation> allVacations = employeeDAO.findAllVacations();
+
+        AllVacationsForm allVacationsForm = new AllVacationsForm(allVacations, FIO);
+
+        model.addAttribute("allVacationsForm", allVacationsForm);
+
+        return "allVacations";
+    }
+
+    @PostMapping(path = "vacations/all/sortBySpecifiedPeriod")
+    public String sortBySpecifiedPeriod(ModelMap model,
+                                        @RequestParam Date startOfPeriod,
+                                        @RequestParam Date endOfPeriod) {
+        List<Vacation> allVacations = employeeDAO.findAllVacations();
+
+        AllVacationsForm allVacationsForm = new AllVacationsForm(allVacations, startOfPeriod, endOfPeriod);
+
+        model.addAttribute("allVacationsForm", allVacationsForm);
+
+        return "allVacations";
+    }
 }
