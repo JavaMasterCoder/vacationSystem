@@ -1,8 +1,9 @@
 package gregor.melikhov.vacation.system.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Employee {
     private String FIO;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(nullable = false, unique = true)
@@ -26,7 +27,7 @@ public class Employee {
     private String post;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date dateOfStartWorking;
 
     @Column(nullable = false, unique = true)
@@ -40,10 +41,10 @@ public class Employee {
 
     public Employee() {
         FIO = "";
-        birthDate = new Date();
+        birthDate = new Date(Calendar.getInstance().getTime().getTime());
         personalNumber = -1;
         post = "";
-        dateOfStartWorking = new Date();
+        dateOfStartWorking = new Date(Calendar.getInstance().getTime().getTime());
         login = "";
         password = "";
         vacations = new ArrayList<>();

@@ -3,7 +3,8 @@ package gregor.melikhov.vacation.system.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 @Entity
 @Table
@@ -12,20 +13,22 @@ public class Vacation {
     @GeneratedValue
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @NotNull
     private Employee employee;
 
     @Column
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date vacationStartDate;
 
     @Column
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date vacationEndDate;
 
     public Vacation() {
-
+        employee = null;
+        vacationStartDate = new Date(Calendar.getInstance().getTime().getTime());
+        vacationEndDate = new Date(Calendar.getInstance().getTime().getTime());
     }
 
     public Vacation(Employee employee, Date vacationStartDate, Date vacationEndDate) {
