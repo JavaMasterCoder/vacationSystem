@@ -72,7 +72,10 @@ public class EmployeeDAO {
     }
 
     public void addVacation(Vacation vacation) {
+        Employee employee = vacation.getEmployee();
+        employee.addVacationToList(vacation);
         manager.getTransaction().begin();
+        manager.persist(employee);
         manager.persist(vacation);
         manager.getTransaction().commit();
     }

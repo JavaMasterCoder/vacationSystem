@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +19,7 @@ public class Employee {
     @Column(nullable = false)
     private Date birthDate;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private int personalNumber;
 
     @Column(nullable = false)
@@ -28,13 +28,15 @@ public class Employee {
     @Column(nullable = false)
     private Date dateOfStartWorking;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY,
+                mappedBy = "employee",
+                cascade = CascadeType.ALL)
     private List<Vacation> vacations;
 
     public Employee() {

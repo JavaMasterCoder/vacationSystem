@@ -43,7 +43,7 @@
         </form>
         <form action="/vacationSystem/vacations/all/sortByEmployee" method="post">
             <input type="text" placeholder="ФИО сотрудника" name="FIO" value="">
-            <input type="submit" value="Сортировать по сотруднику">
+            <input type="submit" value="Фильтровать по сотруднику">
         </form>
         <form action="/vacationSystem/vacations/all/sortBySpecifiedPeriod" method="post">
             <label>
@@ -69,7 +69,11 @@
                     </c:otherwise>
                 </c:choose>
             </label>
-            <input type="submit" value="Сортировать по отпускам в ограниченном диапазоне">
+            <input type="submit" value="Фильтровать по датам">
+        </form>
+
+        <form action="/vacationSystem/vacations/all" method="get">
+            <input type="submit" value="Сброс фильтров">
         </form>
     </c:when>
     <c:otherwise>

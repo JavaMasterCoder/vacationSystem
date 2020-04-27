@@ -7,22 +7,21 @@ import java.sql.Date;
 import java.util.Calendar;
 
 @Entity
-@Table
+@Table(name = "vacations")
 public class Vacation {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER,
+                cascade = CascadeType.ALL)
     @NotNull
     private Employee employee;
 
     @Column
-//    @Temporal(TemporalType.DATE)
     private Date vacationStartDate;
 
     @Column
-//    @Temporal(TemporalType.DATE)
     private Date vacationEndDate;
 
     public Vacation() {

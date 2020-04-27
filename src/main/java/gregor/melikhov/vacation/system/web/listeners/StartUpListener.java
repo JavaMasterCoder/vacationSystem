@@ -18,6 +18,7 @@ public class StartUpListener {
 
     @EventListener
     public void applicationStarted(ContextRefreshedEvent event) {
+//        System.out.println("I'm starting");
         Calendar calendar = Calendar.getInstance();
         calendar.set(1997, Calendar.OCTOBER, 9);
         Date birthDate = new Date(calendar.getTime().getTime());
