@@ -42,6 +42,10 @@
     <a href="/vacationSystem/vacations/all" title="К списку всех отпусков">К списку всех отпусков</a>
 </p>
 
+<form action="/vacationSystem/employee/all/downloadFile" method="get">
+    <input type="submit" value="Скачать документ">
+</form>
+
 <p>
     <a href="/vacationSystem" title="На главную">На главную</a>
 </p>
