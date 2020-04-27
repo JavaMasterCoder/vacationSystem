@@ -32,13 +32,13 @@
             <property name="hibernate.connection.characterEncoding" value="ut8"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
 
-<!--            <property name="javax.persistence.schema-generation.create-source" value="script"/>-->
-<!--            <property name="javax.persistence.schema-generation.create-script-source" value="../database/create.sql"/>-->
+            <property name="javax.persistence.schema-generation.create-source" value="script"/>
+            <property name="javax.persistence.schema-generation.create-script-source" value="../database/create.sql"/>
 
-<!--            <property name="javax.persistence.schema-generation.drop-source" value="script"/>-->
-<!--            <property name="javax.persistence.schema-generation.drop-script-source" value="../database/drop.sql"/>-->
+            <property name="javax.persistence.schema-generation.drop-source" value="script"/>
+            <property name="javax.persistence.schema-generation.drop-script-source" value="../database/drop.sql"/>
 
-<!--            <property name="javax.persistence.sql-load-script-source" value="../database/data.sql"/>-->
+            <property name="javax.persistence.sql-load-script-source" value="../database/data.sql"/>
 
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
