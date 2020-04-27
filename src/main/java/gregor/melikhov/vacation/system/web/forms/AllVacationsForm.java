@@ -1,11 +1,9 @@
 package gregor.melikhov.vacation.system.web.forms;
 
-import gregor.melikhov.vacation.system.model.Employee;
 import gregor.melikhov.vacation.system.model.Vacation;
 
-import java.lang.invoke.VolatileCallSite;
 import java.sql.Date;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,16 +44,13 @@ public class AllVacationsForm {
         this.endOfPeriod = endOfPeriod;
 
         this.allVacations = allVacations.stream()
-                .filter(vacation -> getPeriod(vacation) <= getPeriod(startOfPeriod, endOfPeriod))
+                .filter(vacation -> vacation.getVacationStartDate().getTime() >= startOfPeriod.getTime()
+                                    && vacation.getVacationEndDate().getTime() <= endOfPeriod.getTime())
                 .collect(Collectors.toList());
     }
 
     private long getPeriod(Vacation vacation) {
         return vacation.getVacationEndDate().getTime() - vacation.getVacationStartDate().getTime();
-    }
-
-    private long getPeriod(Date startOfPeriod, Date endOfPeriod) {
-        return endOfPeriod.getTime() - startOfPeriod.getTime();
     }
 
     public List<Vacation> getAllVacations() {

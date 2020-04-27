@@ -11,27 +11,30 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "hibernate_sequence",
+                        sequenceName = "hibernate_sequence",
+                        allocationSize = 1)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "fio")
     private String FIO;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "birthdate")
     private Date birthDate;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "personalnumber")
     private int personalNumber;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "post")
     private String post;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "dateofstartworking")
     private Date dateOfStartWorking;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "login")
     private String login;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "password")
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY,

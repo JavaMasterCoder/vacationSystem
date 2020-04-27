@@ -7,10 +7,13 @@ import java.sql.Date;
 import java.util.Calendar;
 
 @Entity
-@Table(name = "vacations")
+@Table(name = "vacation")
 public class Vacation {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
+//    @SequenceGenerator(name = "hibernate_sequence",
+//                        sequenceName = "hibernate_sequence",
+//                        allocationSize = 1)
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER,
@@ -18,10 +21,10 @@ public class Vacation {
     @NotNull
     private Employee employee;
 
-    @Column
+    @Column(name = "vacationstartdate")
     private Date vacationStartDate;
 
-    @Column
+    @Column(name = "vacationenddate")
     private Date vacationEndDate;
 
     public Vacation() {

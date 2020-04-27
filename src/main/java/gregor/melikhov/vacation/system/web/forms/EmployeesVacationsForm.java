@@ -15,7 +15,7 @@ public class EmployeesVacationsForm {
 
     public void setVacations(List<Vacation> vacations) {
         this.vacations = vacations;
-        employee = vacations.get(0) != null ? vacations.get(0).getEmployee() : null;
+        employee = !vacations.isEmpty() ? vacations.get(0).getEmployee() : null;
     }
 
     public Employee getEmployee() {

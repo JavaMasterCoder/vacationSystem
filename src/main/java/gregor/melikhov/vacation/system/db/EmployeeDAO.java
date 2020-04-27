@@ -66,16 +66,19 @@ public class EmployeeDAO {
     public void addVacation(Employee employee, Date vacationStartDate, Date vacationEndDate) {
         Vacation vacation = new Vacation(employee, vacationStartDate, vacationEndDate);
 
+        employee.addVacationToList(vacation);
+
         manager.getTransaction().begin();
+//        manager.persist(employee);
         manager.persist(vacation);
         manager.getTransaction().commit();
     }
 
     public void addVacation(Vacation vacation) {
         Employee employee = vacation.getEmployee();
-        employee.addVacationToList(vacation);
+//        employee.addVacationToList(vacation);
         manager.getTransaction().begin();
-        manager.persist(employee);
+//        manager.persist(employee);
         manager.persist(vacation);
         manager.getTransaction().commit();
     }
@@ -83,9 +86,32 @@ public class EmployeeDAO {
     @Nullable
     public List<Vacation> findVacationsByEmployee(Employee employee) {
         try {
-            return manager.createQuery("SELECT v from Vacation v WHERE employee.id= :employeeId", Vacation.class)
+            List<Vacation> employeeId = manager.createQuery("SELECT v from Vacation v WHERE employee.id= :employeeId", Vacation.class)
                     .setParameter("employeeId", employee.getId())
                     .getResultList();
+            return  employeeId;
+        } catch (NoResultException cause) {
+            return null;
+        }
+    }
+
+    public void removeVacation(Vacation vacation) {
+        if (vacation == null) {
+            return;
+        }
+        manager.getTransaction().begin();
+        manager.createQuery("DELETE FROM Vacation v WHERE v.id = :idToDelete")
+                .setParameter("idToDelete", vacation.getId())
+                .executeUpdate();
+        manager.getTransaction().commit();
+    }
+
+    @Nullable
+    public Vacation findVacationById(int id) {
+        try {
+            return manager.createQuery("SELECT v from Vacation v WHERE v.id = :idToFind", Vacation.class)
+                    .setParameter("idToFind", id)
+                    .getSingleResult();
         } catch (NoResultException cause) {
             return null;
         }

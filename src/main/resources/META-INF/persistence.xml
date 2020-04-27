@@ -5,11 +5,20 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
             <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
             <property name="hibernate.connection.url" value="jdbc:h2:mem:test" />
-            <property name="hibernate.connection.user" value="root" />
-            <property name="hibernate.connection.password" value="root" />
+            <property name="hibernate.connection.user" value="sa" />
+            <property name="hibernate.connection.password" value="" />
+
+            <property name="javax.persistence.schema-generation.create-source" value="script"/>
+            <property name="javax.persistence.schema-generation.create-script-source" value="/database/create.sql"/>
+
+            <property name="javax.persistence.schema-generation.drop-source" value="script"/>
+            <property name="javax.persistence.schema-generation.drop-script-source" value="/database/drop.sql"/>
+
+            <property name="javax.persistence.sql-load-script-source" value="/database/data.sql"/>
 
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
@@ -22,6 +31,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:9099/vacationsystem" />
@@ -33,12 +43,12 @@
             <property name="hibernate.connection.useUnicode" value="true"/>
 
             <property name="javax.persistence.schema-generation.create-source" value="script"/>
-            <property name="javax.persistence.schema-generation.create-script-source" value="../database/create.sql"/>
+            <property name="javax.persistence.schema-generation.create-script-source" value="/database/create.sql"/>
 
             <property name="javax.persistence.schema-generation.drop-source" value="script"/>
-            <property name="javax.persistence.schema-generation.drop-script-source" value="../database/drop.sql"/>
+            <property name="javax.persistence.schema-generation.drop-script-source" value="/database/drop.sql"/>
 
-            <property name="javax.persistence.sql-load-script-source" value="../database/data.sql"/>
+            <property name="javax.persistence.sql-load-script-source" value="/database/data.sql"/>
 
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
