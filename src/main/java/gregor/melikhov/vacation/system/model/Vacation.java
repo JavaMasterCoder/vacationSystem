@@ -11,9 +11,9 @@ import java.util.Calendar;
 public class Vacation {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-//    @SequenceGenerator(name = "hibernate_sequence",
-//                        sequenceName = "hibernate_sequence",
-//                        allocationSize = 1)
+    @SequenceGenerator(name = "hibernate_sequence",
+                        sequenceName = "hibernate_sequence",
+                        allocationSize = 1)
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER,

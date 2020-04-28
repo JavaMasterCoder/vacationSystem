@@ -11,8 +11,8 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "hibernate_sequence",
-                        sequenceName = "hibernate_sequence",
+    @SequenceGenerator(name = "employee_sequence",
+                        sequenceName = "employee_sequence",
                         allocationSize = 1)
     private int id;
 

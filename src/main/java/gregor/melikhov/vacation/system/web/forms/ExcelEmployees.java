@@ -29,7 +29,7 @@ public class ExcelEmployees extends AbstractXlsView {
         header.createCell(1).setCellValue("ФИО");
         header.createCell(2).setCellValue("Дата начала отпуска");
         header.createCell(3).setCellValue("Дата окончания отпуска");
-        header.createCell(4).setCellValue("Дней в отпуске");
+        header.createCell(4).setCellValue("Количество использованных дней отпуска");
 
         int rowNum = 1;
 
@@ -47,7 +47,16 @@ public class ExcelEmployees extends AbstractXlsView {
                 row.createCell(2).setCellValue(vacationStart);
                 row.createCell(3).setCellValue(vacationEnd);
 
-                long days = (vacationEndDate.getTime() - vacationStartDate.getTime()) / (24 * 60 * 60 * 1000);
+                Date currentDate = new Date(new java.util.Date().getTime());
+
+                long days = 0;
+                if (currentDate.getTime() > vacationStartDate.getTime() && currentDate.getTime() < vacationEndDate.getTime()) {
+                    days = (currentDate.getTime() - vacationStartDate.getTime());
+                } else if (currentDate.getTime() > vacationEndDate.getTime()){
+                    days = (vacationEndDate.getTime() - vacationStartDate.getTime());
+                }
+
+                days /= (24 * 60 * 60 * 1000);
 
                 row.createCell(4).setCellValue(days);
             }
