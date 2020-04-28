@@ -7,6 +7,8 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class HibernateConnectionTest {
     private EntityManagerFactory factory;
@@ -31,8 +33,15 @@ public class HibernateConnectionTest {
 
     @Test
     public void createEmployeeTest() {
-        Employee employee = new Employee();
-        employee.setFIO("Мелихов Григорий Федорович");
+        String FIO = "JJ Abrams";
+        int personalNumber = 115;
+        String post = "newbie";
+        String login = "login";
+        String password = "password";
+        Date birthDate = new Date(new java.util.Date().getTime());
+        Date dateOfStratWorking = new Date(new java.util.Date().getTime());
+
+        Employee employee = new Employee(FIO, birthDate, personalNumber, post, dateOfStratWorking, login, password);
 
         manager.getTransaction().begin();
         manager.persist(employee);
@@ -41,11 +50,23 @@ public class HibernateConnectionTest {
 
     @Test
     public void createVacation() {
-        Employee employee = new Employee();
-        employee.setFIO("Мелихов Григорий Федорович");
+        String FIO = "JJ Abrams";
+        int personalNumber = 115;
+        String post = "newbie";
+        String login = "login";
+        String password = "password";
+        Date birthDate = new Date(new java.util.Date().getTime());
+        Date dateOfStratWorking = new Date(new java.util.Date().getTime());
 
-        Vacation vacation = new Vacation();
-        vacation.setEmployee(employee);
+        Employee employee = new Employee(FIO, birthDate, personalNumber, post, dateOfStratWorking, login, password);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2020, 11, 13);
+        Date vacationStartDate = new Date(calendar.getTimeInMillis());
+
+        calendar.set(2020, 11, 27);
+        Date vacationEndDate = new Date(calendar.getTimeInMillis());
+        Vacation vacation = new Vacation(employee, vacationStartDate, vacationEndDate);
 
         manager.getTransaction().begin();
         manager.persist(employee);
